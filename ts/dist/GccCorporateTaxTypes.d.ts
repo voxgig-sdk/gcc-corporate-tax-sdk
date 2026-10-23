@@ -1,0 +1,40 @@
+export interface Calculator {
+    income?: number;
+    revenue?: number;
+    sbr?: string;
+    status?: string;
+}
+export interface CalculatorCreateData {
+    income?: number;
+    revenue?: number;
+    sbr?: string;
+    status?: string;
+}
+export interface Enquiry {
+    answers: Record<string, any>;
+    confirmation?: string;
+    consent: boolean;
+}
+export interface EnquiryCreateData {
+    answers: Record<string, any>;
+    confirmation?: string;
+    consent: boolean;
+}
+export interface Mcp {
+    id?: string;
+    jsonrpc: any;
+    method: string;
+    params?: Record<string, any>;
+}
+export interface McpLoadMatch {
+    id: string;
+    jsonrpc?: any;
+    method?: string;
+    params?: Record<string, any>;
+}
+export interface McpCreateData {
+    id?: string;
+    jsonrpc: any;
+    method: string;
+    params?: Record<string, any>;
+}

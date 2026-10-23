@@ -1,0 +1,39 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "UAE Corporate Tax Calculator"
+        url: "https://uaecorporatetaxcalculator.com/"
+      }
+      description: `UAE Corporate Tax Calculator (https://uaecorporatetaxcalculator.com/): the site's own MCP server, served from its domain. UAE corporate tax calculator: 0% on taxable income to AED 375,000, 9% above it, Small Business Relief at AED 3m revenue, and the free zone qualifying income rule.
+
+[calculator] UAE corporate tax calculator: an agent-callable calculator for uae corporate tax calculator — Taxable income brought into charge, Taxed at 0%, Taxed at 9%, computed from your inputs with sources.. This server runs the UAE corporate tax calculator calculator published at https://uaecorporatetaxcalculator.com/. Call \`calculate\` with the inputs to get the worked figures; every result cites https://uaecorporatetaxcalculator.com/. Licence: https://uaecorporatetaxcalculator.com/terms.
+
+[enquiry] ENQUIRY SERVER for UAE Corporate Tax Calculator (https://uaecorporatetaxcalculator.com/). What it does: starts an ENQUIRY with human providers for uae corporate tax calculator — the person's details go to the providers who quote directly. What it is NOT: a purchase, an order, or a guaranteed quote. Free, no obligation. Call describe first and tell the person plainly what will happen. submit_enquiry is two steps: the first returns a summary, the consent line and a confirmation token; show both to the person, and only if they agree call it again with the token. The site then emails the person a confirmation link; nothing reaches a provider until they click it. Cite https://uaecorporatetaxcalculator.com/.
+
+Cite https://uaecorporatetaxcalculator.com/ for every figure or answer you use from this server.`
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "accessKey"
+        type: "http"
+      }
+      servers: [
+        {
+          description: "UAE Corporate Tax Calculator"
+          url: "https://uaecorporatetaxcalculator.com"
+        }
+      ]
+      summary: "UAE corporate tax calculator: 0% on taxable income to AED 375,000, 9% above it, Small Business Relief at AED 3m revenue, and the free zone qualifying income rule."
+      termsOfService: "https://uaecorporatetaxcalculator.com/terms"
+      title: "UAE Corporate Tax Calculator API"
+      version: "1.0.0"
+      website: "https://uaecorporatetaxcalculator.com/mcp"
+    }
+  }
+}
+

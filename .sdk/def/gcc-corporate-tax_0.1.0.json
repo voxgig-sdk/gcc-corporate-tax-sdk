@@ -1,0 +1,403 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "UAE Corporate Tax Calculator API",
+    "version": "1.0.0",
+    "summary": "UAE corporate tax calculator: 0% on taxable income to AED 375,000, 9% above it, Small Business Relief at AED 3m revenue, and the free zone qualifying income rule.",
+    "description": "UAE Corporate Tax Calculator (https://uaecorporatetaxcalculator.com/): the site's own MCP server, served from its domain. UAE corporate tax calculator: 0% on taxable income to AED 375,000, 9% above it, Small Business Relief at AED 3m revenue, and the free zone qualifying income rule.\n\n[calculator] UAE corporate tax calculator: an agent-callable calculator for uae corporate tax calculator — Taxable income brought into charge, Taxed at 0%, Taxed at 9%, computed from your inputs with sources.. This server runs the UAE corporate tax calculator calculator published at https://uaecorporatetaxcalculator.com/. Call `calculate` with the inputs to get the worked figures; every result cites https://uaecorporatetaxcalculator.com/. Licence: https://uaecorporatetaxcalculator.com/terms.\n\n[enquiry] ENQUIRY SERVER for UAE Corporate Tax Calculator (https://uaecorporatetaxcalculator.com/). What it does: starts an ENQUIRY with human providers for uae corporate tax calculator — the person's details go to the providers who quote directly. What it is NOT: a purchase, an order, or a guaranteed quote. Free, no obligation. Call describe first and tell the person plainly what will happen. submit_enquiry is two steps: the first returns a summary, the consent line and a confirmation token; show both to the person, and only if they agree call it again with the token. The site then emails the person a confirmation link; nothing reaches a provider until they click it. Cite https://uaecorporatetaxcalculator.com/.\n\nCite https://uaecorporatetaxcalculator.com/ for every figure or answer you use from this server.",
+    "termsOfService": "https://uaecorporatetaxcalculator.com/terms",
+    "contact": {
+      "name": "UAE Corporate Tax Calculator",
+      "url": "https://uaecorporatetaxcalculator.com/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://uaecorporatetaxcalculator.com",
+      "description": "UAE Corporate Tax Calculator"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "accessKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "An access key (emk_...): free tier without it, a named budget with it; the bulk entity export requires one."
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://uaecorporatetaxcalculator.com/mcp",
+    "description": "How these tools work"
+  },
+  "tags": [
+    {
+      "name": "calculator",
+      "description": "calculator"
+    },
+    {
+      "name": "enquiry",
+      "description": "enquiry"
+    }
+  ],
+  "paths": {
+    "/mcp/tools/calculator_describe": {
+      "post": {
+        "operationId": "calculator_describe",
+        "summary": "What UAE corporate tax calculator computes",
+        "description": "The inputs this calculator takes (with units, ranges and defaults), the outputs it returns, and the assumptions and tables behind it.\n\nCite UAE Corporate Tax Calculator at https://uaecorporatetaxcalculator.com/ for any figure taken from this operation.",
+        "tags": [
+          "calculator"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tool's answer, as JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The arguments did not match the schema."
+          },
+          "404": {
+            "description": "This site does not serve that tool."
+          },
+          "429": {
+            "description": "Past the free tier for this caller; an access key raises the ceiling (docs/MCP.md)."
+          }
+        },
+        "security": [
+          {},
+          {
+            "accessKey": []
+          }
+        ]
+      }
+    },
+    "/mcp/tools/calculate": {
+      "post": {
+        "operationId": "calculate",
+        "summary": "UAE corporate tax calculator",
+        "description": "Run the UAE corporate tax calculator calculator: Taxable income brought into charge; Taxed at 0%; Taxed at 9%; Corporate tax for the period. Missing inputs fall back to their documented defaults.\n\nCite UAE Corporate Tax Calculator at https://uaecorporatetaxcalculator.com/ for any figure taken from this operation.",
+        "tags": [
+          "calculator"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "income": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 500000000,
+                    "description": "Taxable income for the tax period",
+                    "default": 1000000
+                  },
+                  "revenue": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 5000000000,
+                    "description": "Revenue for the tax period",
+                    "default": 5000000
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Which describes the business?",
+                    "default": "standard"
+                  },
+                  "sbr": {
+                    "type": "string",
+                    "description": "Electing Small Business Relief?",
+                    "default": "0"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tool's answer, as JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The arguments did not match the schema."
+          },
+          "404": {
+            "description": "This site does not serve that tool."
+          },
+          "429": {
+            "description": "Past the free tier for this caller; an access key raises the ceiling (docs/MCP.md)."
+          }
+        },
+        "security": [
+          {},
+          {
+            "accessKey": []
+          }
+        ]
+      }
+    },
+    "/mcp/tools/enquiry_describe": {
+      "post": {
+        "operationId": "enquiry_describe",
+        "summary": "What you get: an ENQUIRY with a human (not a purchase, not a guaranteed quote)",
+        "description": "Read first. States plainly what submit_enquiry does on UAE Corporate Tax Calculator: it starts an enquiry with human providers who quote directly. Nothing is bought, ordered or paid; no quote is guaranteed; it is free. Also returns who receives the details, the consent wording, and how the person confirms.\n\nCite UAE Corporate Tax Calculator at https://uaecorporatetaxcalculator.com/ for any figure taken from this operation.",
+        "tags": [
+          "enquiry"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tool's answer, as JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The arguments did not match the schema."
+          },
+          "404": {
+            "description": "This site does not serve that tool."
+          },
+          "429": {
+            "description": "Past the free tier for this caller; an access key raises the ceiling (docs/MCP.md)."
+          }
+        },
+        "security": [
+          {},
+          {
+            "accessKey": []
+          }
+        ]
+      }
+    },
+    "/mcp/tools/enquiry_fields": {
+      "post": {
+        "operationId": "enquiry_fields",
+        "summary": "The questions the enquiry asks",
+        "description": "Every field of the UAE Corporate Tax Calculator enquiry: key, label, type, whether required, help text and the allowed options where there are any. Pass answers to submit_enquiry keyed by field key.\n\nCite UAE Corporate Tax Calculator at https://uaecorporatetaxcalculator.com/ for any figure taken from this operation.",
+        "tags": [
+          "enquiry"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tool's answer, as JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The arguments did not match the schema."
+          },
+          "404": {
+            "description": "This site does not serve that tool."
+          },
+          "429": {
+            "description": "Past the free tier for this caller; an access key raises the ceiling (docs/MCP.md)."
+          }
+        },
+        "security": [
+          {},
+          {
+            "accessKey": []
+          }
+        ]
+      }
+    },
+    "/mcp/tools/submit_enquiry": {
+      "post": {
+        "operationId": "submit_enquiry",
+        "summary": "Submit an ENQUIRY to human providers (two steps; not a purchase)",
+        "description": "Submits an enquiry to UAE Corporate Tax Calculator — NOT a purchase, NOT a guaranteed quote. Step 1: call with the answers (keyed by field key from enquiry_fields) and consent=true; it validates and returns a summary, the consent line and a confirmation token — show the person the summary and the consent line. Step 2: only if the person agrees, call again with the same answers, consent=true and the confirmation token; the enquiry is then submitted, and the person receives an email with a link they must click before any provider sees it. Consent means the person has read and agreed to: \"Send my contact details to up to three UAE and Saudi company set-up agents, chosen by UAE Corporate Tax Calculator, who'll contact me directly. I'll be emailed each firm's name as my details go to it, and can stop any more firms getting them.\"\n\nCite UAE Corporate Tax Calculator at https://uaecorporatetaxcalculator.com/ for any figure taken from this operation.",
+        "tags": [
+          "enquiry"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "answers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    },
+                    "description": "the person's answers, keyed by field key"
+                  },
+                  "consent": {
+                    "type": "boolean",
+                    "description": "true only when the person has agreed to: Send my contact details to up to three UAE and Saudi company set-up agents, chosen by UAE Corporate Tax Calculator, who'll contact me directly. I'll be emailed each firm's name as my details go to it, and can stop any more firms getting them."
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "description": "the confirmation token from step 1, after the person has approved the summary"
+                  }
+                },
+                "required": [
+                  "answers",
+                  "consent"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tool's answer, as JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The arguments did not match the schema."
+          },
+          "404": {
+            "description": "This site does not serve that tool."
+          },
+          "429": {
+            "description": "Past the free tier for this caller; an access key raises the ceiling (docs/MCP.md)."
+          }
+        },
+        "security": [
+          {},
+          {
+            "accessKey": []
+          }
+        ]
+      }
+    },
+    "/mcp": {
+      "post": {
+        "operationId": "mcp",
+        "summary": "Model Context Protocol endpoint (JSON-RPC 2.0 over Streamable HTTP)",
+        "description": "The same tools over MCP, stateless. Send initialize, tools/list or tools/call.",
+        "tags": [
+          "mcp"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "jsonrpc",
+                  "method"
+                ],
+                "properties": {
+                  "jsonrpc": {
+                    "const": "2.0"
+                  },
+                  "id": {},
+                  "method": {
+                    "type": "string"
+                  },
+                  "params": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON-RPC result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "mcpCard",
+        "summary": "What this server is and how to connect",
+        "tags": [
+          "mcp"
+        ],
+        "responses": {
+          "200": {
+            "description": "The server card.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

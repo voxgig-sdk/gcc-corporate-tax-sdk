@@ -1,0 +1,72 @@
+<?php
+declare(strict_types=1);
+
+// GccCorporateTax SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+GccCorporateTaxUtility::setRegistrar(function (GccCorporateTaxUtility $u): void {
+    $u->clean = [GccCorporateTaxClean::class, 'call'];
+    $u->clean_add = [GccCorporateTaxClean::class, 'add'];
+    $u->clean_explain = [GccCorporateTaxDone::class, 'clean_explain'];
+    $u->done = [GccCorporateTaxDone::class, 'call'];
+    $u->make_error = [GccCorporateTaxMakeError::class, 'call'];
+    $u->feature_add = [GccCorporateTaxFeatureAdd::class, 'call'];
+    $u->feature_hook = [GccCorporateTaxFeatureHook::class, 'call'];
+    $u->feature_init = [GccCorporateTaxFeatureInit::class, 'call'];
+    $u->fetcher = [GccCorporateTaxFetcher::class, 'call'];
+    $u->make_fetch_def = [GccCorporateTaxMakeFetchDef::class, 'call'];
+    $u->make_context = [GccCorporateTaxMakeContext::class, 'call'];
+    $u->make_options = [GccCorporateTaxMakeOptions::class, 'call'];
+    $u->make_request = [GccCorporateTaxMakeRequest::class, 'call'];
+    $u->make_response = [GccCorporateTaxMakeResponse::class, 'call'];
+    $u->make_result = [GccCorporateTaxMakeResult::class, 'call'];
+    $u->make_point = [GccCorporateTaxMakePoint::class, 'call'];
+    $u->make_spec = [GccCorporateTaxMakeSpec::class, 'call'];
+    $u->make_url = [GccCorporateTaxMakeUrl::class, 'call'];
+    $u->param = [GccCorporateTaxParam::class, 'call'];
+    $u->prepare_auth = [GccCorporateTaxPrepareAuth::class, 'call'];
+    $u->prepare_body = [GccCorporateTaxPrepareBody::class, 'call'];
+    $u->prepare_headers = [GccCorporateTaxPrepareHeaders::class, 'call'];
+    $u->prepare_method = [GccCorporateTaxPrepareMethod::class, 'call'];
+    $u->prepare_params = [GccCorporateTaxPrepareParams::class, 'call'];
+    $u->prepare_path = [GccCorporateTaxPreparePath::class, 'call'];
+    $u->prepare_query = [GccCorporateTaxPrepareQuery::class, 'call'];
+    $u->graphql_body = [GccCorporateTaxGraphql::class, 'body'];
+    $u->graphql_errors = [GccCorporateTaxGraphql::class, 'errors'];
+    $u->result_basic = [GccCorporateTaxResultBasic::class, 'call'];
+    $u->result_body = [GccCorporateTaxResultBody::class, 'call'];
+    $u->result_headers = [GccCorporateTaxResultHeaders::class, 'call'];
+    $u->transform_request = [GccCorporateTaxTransformRequest::class, 'call'];
+    $u->transform_response = [GccCorporateTaxTransformResponse::class, 'call'];
+});

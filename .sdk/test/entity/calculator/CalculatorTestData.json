@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "calculator": {
+      "CALCULATOR00": {
+        "income": 40,
+        "revenue": 41,
+        "sbr": "s2a",
+        "status": "s2b",
+        "id": "CALCULATOR00"
+      },
+      "CALCULATOR01": {
+        "income": 80,
+        "revenue": 81,
+        "sbr": "s52",
+        "status": "s53",
+        "id": "CALCULATOR01"
+      },
+      "CALCULATOR02": {
+        "income": 120,
+        "revenue": 121,
+        "sbr": "s7a",
+        "status": "s7b",
+        "id": "CALCULATOR02"
+      }
+    }
+  },
+  "new": {
+    "calculator": {
+      "calculator_ref01": {
+        "income": 160,
+        "revenue": 161,
+        "sbr": "sa2",
+        "status": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /mcp/tools/calculate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /mcp/tools/calculator_describe": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+# Entity: calculator
+
+main: kit: entity: calculator: {
+
+  alias: field: {}
+
+  fields: {
+    income: {
+      h: "Income"
+      n: "income"
+      r: false
+      sh: "Taxable income for the tax period"
+      t: "`$NUMBER`"
+    }
+    revenue: {
+      h: "Revenue"
+      n: "revenue"
+      r: false
+      sh: "Revenue for the tax period"
+      t: "`$NUMBER`"
+    }
+    sbr: {
+      h: "Sbr"
+      n: "sbr"
+      r: false
+      sh: "Electing Small Business Relief?"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Which describes the business?"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "calculator"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "income"
+            "revenue"
+            "sbr"
+            "status"
+          ]
+          co: {
+            id: "POST /mcp/tools/calculate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/mcp/tools/calculate"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "mcp"
+            }
+            {
+              lit: "tools"
+            }
+            {
+              lit: "calculate"
+            }
+          ]
+          t: {
+            req: {
+              income: "`reqdata.income`"
+              revenue: "`reqdata.revenue`"
+              sbr: "`reqdata.sbr`"
+              status: "`reqdata.status`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: false
+          co: {
+            id: "POST /mcp/tools/calculator_describe"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/mcp/tools/calculator_describe"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "mcp"
+            }
+            {
+              lit: "tools"
+            }
+            {
+              lit: "calculator_describe"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
